@@ -27,8 +27,8 @@ def main():
   y: int = 1
   
   # move to the right by default
-  delta_x = 1
-  delta_y = 0
+  delta_x: int = 1
+  delta_y: int = 0
 
   # array of snake coordinates
   pos = []
