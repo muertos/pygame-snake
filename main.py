@@ -17,9 +17,9 @@ def main():
   # VARIABLES
   #
 
-  SCREEN_WIDTH: int = 1280 
-  SCREEN_HEIGHT: int = 960 
-  CELL_WIDTH: int = 4 
+  SCREEN_WIDTH: int = 640 
+  SCREEN_HEIGHT: int = 480 
+  CELL_WIDTH: int = 24 
 
   grid = Grid(SCREEN_WIDTH, SCREEN_HEIGHT, CELL_WIDTH)
   snake_length: int = 8
