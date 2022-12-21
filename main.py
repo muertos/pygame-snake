@@ -67,7 +67,7 @@ def main():
   # update snake position every 50ms
   pygame.time.set_timer(draw_snake, 50)
   # update snake bullet every 3ms
-  pygame.time.set_timer(shoot, 3)
+  #pygame.time.set_timer(shoot, 3)
 
   while True:
     clock.tick(120)
@@ -121,9 +121,9 @@ def main():
             sys.exit()
         # update our tracking array's first element with the head of the snake
         pos.insert(0, (x, y))
-      if e.type == shoot:
-        # draw snake bullet
-        ... 
+      #if e.type == shoot:
+      #  # draw snake bullet
+      #  ... 
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
