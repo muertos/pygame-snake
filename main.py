@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pygame
 import random
 import sys
@@ -140,6 +142,8 @@ def main():
       delta_x = 0
     if keys[pygame.K_SPACE]:
       shoot_event = True
+    if keys[pygame.K_END]:
+      return
 
     pygame.display.flip()
 
