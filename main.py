@@ -98,6 +98,7 @@ def main():
         # update snake head x,y
         x += delta_x
         y += delta_y
+        # TODO: collision detection
 
         for i in range(snake_length):
           _x = pos[i][0]
