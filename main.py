@@ -27,6 +27,14 @@ def main():
   # head position of snake
   x: int = snake_length
   y: int = 1
+
+  # update speed in ms
+  update_speed: int = 60
+
+  # reaction ratio
+  # looking for that sweet spot when moving the snake
+  reaction_ratio = CELL_WIDTH / update_speed
+  print(f"Reaction ration is {reaction_ratio}")
   
   # move to the right by default
   delta_x: int = 1
@@ -66,10 +74,8 @@ def main():
   # draw first apple
   grid.draw_cell(background, apple_x, apple_y, (220,0,0))
 
-  # update snake position every 50ms
-  pygame.time.set_timer(draw_snake, 50)
-  # update snake bullet every 3ms
-  #pygame.time.set_timer(shoot, 3)
+  # update snake position 
+  pygame.time.set_timer(draw_snake, update_speed)
 
   while True:
     clock.tick(120)
