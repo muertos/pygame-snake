@@ -17,13 +17,13 @@ def main():
   # VARIABLES
   #
 
-  SCREEN_WIDTH: int = 640 
-  SCREEN_HEIGHT: int = 480 
-  CELL_WIDTH: int = 24 
+  SCREEN_WIDTH: int = 626
+  SCREEN_HEIGHT: int = 476
+  CELL_WIDTH: int = 24
 
   grid = Grid(SCREEN_WIDTH, SCREEN_HEIGHT, CELL_WIDTH)
   snake_length: int = 8
-  
+
   # head position of snake
   x: int = snake_length
   y: int = 1
@@ -35,7 +35,7 @@ def main():
   # looking for that sweet spot when moving the snake
   reaction_ratio = CELL_WIDTH / update_speed
   print(f"Reaction ration is {reaction_ratio}")
-  
+
   # move to the right by default
   delta_x: int = 1
   delta_y: int = 0
@@ -52,6 +52,7 @@ def main():
       pos.insert(0, (x, i + 1))
     if delta_y == -1:
       pos.append((x, i + 1))
+  print(f"Initialized array: {pos}")
 
   # snakes eat apples
   apple_x = random.randrange(int(SCREEN_WIDTH / (CELL_WIDTH + 1)))
@@ -74,7 +75,7 @@ def main():
   # draw first apple
   grid.draw_cell(background, apple_x, apple_y, (220,0,0))
 
-  # update snake position 
+  # update snake position
   pygame.time.set_timer(draw_snake, update_speed)
 
   while True:
