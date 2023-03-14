@@ -52,7 +52,6 @@ def main():
       pos.insert(0, (x, i + 1))
     if delta_y == -1:
       pos.append((x, i + 1))
-  print(f"Initialized array: {pos}")
 
   # snakes eat apples
   apple_x = random.randrange(int(SCREEN_WIDTH / (CELL_WIDTH + 1)))
@@ -99,7 +98,15 @@ def main():
         # update snake head x,y
         x += delta_x
         y += delta_y
-        # TODO: collision detection
+        # collision detection
+        if x > grid.width:
+            x = 1
+        if x < 0:
+            x = grid.width
+        if y > grid.height:
+            y = 1
+        if y < 0:
+            y = grid.height
 
         for i in range(snake_length):
           _x = pos[i][0]

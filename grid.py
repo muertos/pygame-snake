@@ -8,18 +8,17 @@ class Grid:
     self.MAX_X = x
     self.MAX_Y = y
     self.CELL_WIDTH = cell_width
-    matrix_width = int(x / (cell_width + 1))
-    matrix_height = int(y / (cell_width + 1))
+    # width and height of grid
+    self.width = int(x / (cell_width + 1))
+    self.height = int(y / (cell_width + 1))
     # referenced using [y][x]
-    self.matrix = [[0 for i in range(matrix_width)] for j in range(matrix_height)]
+    self.matrix = [[0 for i in range(self.width)] for j in range(self.height)]
 
   def draw_grid(self, background, color: Tuple[int,int,int]):
       for x in range(0, self.MAX_X, self.CELL_WIDTH + 1):
         pygame.draw.line(background, color, (0 + x, 0), (0 + x, self.MAX_Y))
-        print(f"Line X: {x}")
       for y in range(0, self.MAX_Y, self.CELL_WIDTH + 1):
         pygame.draw.line(background, color, (0, 0 + y), (self.MAX_X, 0 + y))
-        print(f"Line Y: {y}")
 
   def draw_cell(self, background, x: int, y: int, color: Tuple[int,int,int]):
     pygame.draw.rect(background, color, Rect(
