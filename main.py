@@ -69,7 +69,7 @@ def main():
   screen.fill((255,255,255))
 
   # draw game grid
-  grid.draw_grid(background, (100,100,100))
+  grid.draw_grid(background, (0,0,0))
 
   # draw first apple
   grid.draw_cell(background, apple_x, apple_y, (220,0,0))
@@ -142,6 +142,7 @@ def main():
       #  # draw snake bullet
       #  ... 
 
+    # TODO: Remove one of the directions and replace it with a toggle, maybe try that for both
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
       delta_x = -1
