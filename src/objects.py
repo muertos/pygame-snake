@@ -130,29 +130,14 @@ class Snake(Apple):
         self.y = 1
     if self.y < 0:
         self.y = Grid.height
-
     # check if snake ate apple
-    for i in range(self.length):
-      # store current position
-      _x = self.pos[i][0]
-      _y = self.pos[i][1]
-      # snake ate apple
-      if (self.x, self.y) == (apple.x, apple.y):
-        print("snake ate apple")
-        self.length += 1
+    if (self.x, self.y) == (apple.x, apple.y):
+      self.length += 1
+      apple.generate()
+      if (apple.x, apple.y) in self.pos:
+        # this is lazy checking, improve later
         apple.generate()
-        # todo: check if apple was drawn on the snake, regenerate if so
-        if (apple.x, apple.y) in self.pos:
-          # this is lazy checking, improve later
-          apple.generate()
-        apple.draw_cell(background, apple.x, apple.y, apple.color)
-        self.pos.insert(0, (self.x, self.y))
-      # snake cannot touch itself
-      if self.x == _x and self.y == _y:
-        print("You touched yourself! Bye")
-        sys.exit()
-    # update our tracking array's first element with the head of the snake
-    print(self.pos)
+      apple.draw_cell(background, apple.x, apple.y, apple.color)
+      self.pos.insert(0, (self.x, self.y))
     self.pos.insert(0, (self.x, self.y))
     self.pos.pop(self.length)
-    print(self.pos)
