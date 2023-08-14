@@ -15,5 +15,5 @@ pip install -U pip
 pip install -r requirements.txt
 
 # execute
-./main.py
+./src/main.py
 ```
