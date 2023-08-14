@@ -1,12 +1,23 @@
 import pygame, random, sys
 from pygame.locals import *
 
+# Constants
+SCREEN_WIDTH = 626
+SCREEN_HEIGHT = 476
+CELL_WIDTH = 8
+LINE_COLOR = (0,0,0)
+BG_COLOR = (0,0,0)
+SNAKE_COLOR = (0,0,220)
+SNAKE_SPEED = 60
+APPLE_COLOR = (220,0,0)
+
 class Game():
-  screen_width = 626
-  screen_height = 476
-  cell_width = 8
-  bg_color = (0,0,0)
+  screen_width = SCREEN_WIDTH
+  screen_height = SCREEN_HEIGHT
+  cell_width = CELL_WIDTH
+  bg_color = BG_COLOR 
   score = 0
+
   def __init__(self) -> None:
     pygame.init()
     self.clock = pygame.time.Clock()
@@ -24,6 +35,7 @@ class Game():
     while True:
       self.clock.tick(120)
       self.screen.blit(self.background, (0,0))
+      self.screen.blit(snake.score_text, (0,0))
 
       # event handler
       for e in pygame.event.get():
@@ -52,12 +64,10 @@ class Game():
         sys.exit(0)
 
       pygame.display.flip()
-      print(self.score)
 
 class Grid(Game):
-  # build in a header that tracks the score
   width = int(Game.screen_width / (Game.cell_width + 1))
-  height = int(Game.screen_height / (Game.cell_width + 1))
+  height = int((Game.screen_height) / (Game.cell_width + 1))
 
   def __init__(self, Game) -> None:
     self.matrix = [[0 for i in range(self.width)] for j in range(self.height)]
@@ -76,6 +86,9 @@ class Grid(Game):
       self.cell_width - 1
       )
     )
+
+  def draw_header(self, background):
+    pass
 
 class Apple(Grid):
   def __init__(self, color) -> None:
@@ -99,6 +112,9 @@ class Snake(Apple):
     self.pos = []
     self.dx = 1
     self.dy = 0
+    self.score = 0
+    self.font = pygame.font.SysFont(None, 24)
+    self.score_text = self.font.render(f"score: {self.score}", True, (0,200,0))
     # initialize snake coordinates
     for i in range(self.length):
       if self.dx == 1:
@@ -109,6 +125,10 @@ class Snake(Apple):
         self.pos.insert(0, (self.x, i + 1))
       if self.dy == -1:
         self.pos.append((self.x, i + 1))
+
+  def update_score(self):
+    self.score += 1
+    self.score_text = self.font.render(f"score: {self.score}", True, (0,200,0))
 
   def update_pos(self, background, apple):
     # extract snake head x,y from 0th pos
@@ -137,7 +157,7 @@ class Snake(Apple):
     if (self.x, self.y) == (apple.x, apple.y):
       self.length += 1
       apple.generate()
-      Game.score += 1
+      self.update_score()
       if (apple.x, apple.y) in self.pos:
         # this is lazy checking, improve later
         apple.generate()
