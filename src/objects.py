@@ -6,6 +6,7 @@ class Game():
   screen_height = 476
   cell_width = 8
   bg_color = (0,0,0)
+  score = 0
   def __init__(self) -> None:
     pygame.init()
     self.clock = pygame.time.Clock()
@@ -51,8 +52,10 @@ class Game():
         sys.exit(0)
 
       pygame.display.flip()
+      print(self.score)
 
 class Grid(Game):
+  # build in a header that tracks the score
   width = int(Game.screen_width / (Game.cell_width + 1))
   height = int(Game.screen_height / (Game.cell_width + 1))
 
@@ -134,6 +137,7 @@ class Snake(Apple):
     if (self.x, self.y) == (apple.x, apple.y):
       self.length += 1
       apple.generate()
+      Game.score += 1
       if (apple.x, apple.y) in self.pos:
         # this is lazy checking, improve later
         apple.generate()
