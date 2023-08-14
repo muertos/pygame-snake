@@ -121,7 +121,7 @@ class Snake(Apple):
     # update head x,y
     self.x += self.dx
     self.y += self.dy
-    # collision detection
+    # wall collision detection
     if self.x > Grid.width:
         self.x = 1
     if self.x < 0:
@@ -138,6 +138,15 @@ class Snake(Apple):
         # this is lazy checking, improve later
         apple.generate()
       apple.draw_cell(background, apple.x, apple.y, apple.color)
+      # this seems wrong, but it works
       self.pos.insert(0, (self.x, self.y))
+    # check if snake collided with itself
+    for i in range(self.length):
+      # avoid index error
+      if i == self.length - 1:
+        break
+      if self.pos[i + 1] == (self.x, self.y):
+        print("you collided with yourself!")
+        sys.exit()
     self.pos.insert(0, (self.x, self.y))
     self.pos.pop(self.length)
