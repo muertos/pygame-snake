@@ -15,8 +15,7 @@ class Game():
   screen_width = SCREEN_WIDTH
   screen_height = SCREEN_HEIGHT
   cell_width = CELL_WIDTH
-  bg_color = BG_COLOR 
-  score = 0
+  bg_color = BG_COLOR
 
   def __init__(self) -> None:
     pygame.init()
