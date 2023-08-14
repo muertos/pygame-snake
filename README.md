@@ -1,9 +1,7 @@
 # pygame-snake
-Snake written using Pygame
+Snake written using Pygame.
 
-WIP
-
-Having fun with coding :)
+[Example of the game running](img/game_running.jpg)
 
 ## Installing and Using (Linux)
 ```sh
