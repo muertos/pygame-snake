@@ -1,4 +1,4 @@
-import pygame, random, sys
+import pygame, random, sys, os
 from pygame.locals import *
 
 # Constants
@@ -89,6 +89,9 @@ class Grid(Game):
 
 class Snake(Grid):
   def __init__(self, speed, color) -> None:
+    pygame.mixer.init()
+    self.s = "sound"
+    self.eat_apple = pygame.mixer.Sound(os.path.join(self.s, "beep.wav"))
     self.length = SNAKE_LENGTH
     self.x = self.length
     self.y = 1
@@ -141,6 +144,7 @@ class Snake(Grid):
     # check if snake ate apple
     if (self.x, self.y) == (apple.x, apple.y):
       self.length += 1
+      pygame.mixer.Sound.play(self.eat_apple)
       apple.generate(self)
       self.update_score()
       apple.draw_cell(background, apple.x, apple.y, apple.color)
