@@ -1,7 +1,7 @@
 # pygame-snake
 Snake written using Pygame.
 
-←, ↑, →, ↓
+←  ↑  →  ↓
 
 ![Example of the game running](img/game_running.jpg)
 
