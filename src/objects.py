@@ -8,6 +8,7 @@ CELL_WIDTH = 8
 LINE_COLOR = (0,0,0)
 BG_COLOR = (0,0,0)
 SNAKE_COLOR = (0,0,220)
+SNAKE_LENGTH = 8
 SNAKE_SPEED = 60
 APPLE_COLOR = (220,0,0)
 
@@ -86,24 +87,9 @@ class Grid(Game):
       )
     )
 
-  def draw_header(self, background):
-    pass
-
-class Apple(Grid):
-  def __init__(self, color) -> None:
-    # FIXME: can spawn on snake
-    self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1)))
-    self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
-    self.color = color
-
-  def generate(self):
-    """ generate new Apple x,y """
-    self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1)))
-    self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
-
-class Snake(Apple):
+class Snake(Grid):
   def __init__(self, speed, color) -> None:
-    self.length = 8
+    self.length = SNAKE_LENGTH
     self.x = self.length
     self.y = 1
     self.speed = speed
@@ -155,11 +141,8 @@ class Snake(Apple):
     # check if snake ate apple
     if (self.x, self.y) == (apple.x, apple.y):
       self.length += 1
-      apple.generate()
+      apple.generate(self)
       self.update_score()
-      if (apple.x, apple.y) in self.pos:
-        # this is lazy checking, improve later
-        apple.generate()
       apple.draw_cell(background, apple.x, apple.y, apple.color)
       # this seems wrong, but it works
       self.pos.insert(0, (self.x, self.y))
@@ -173,3 +156,19 @@ class Snake(Apple):
         sys.exit()
     self.pos.insert(0, (self.x, self.y))
     self.pos.pop(self.length)
+
+class Apple(Snake):
+  def __init__(self, color) -> None:
+    # don't spawn an x value within the snake's coords
+    self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1) + SNAKE_LENGTH))
+    self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
+    self.color = color
+
+  def generate(self, snake):
+    """ generate new Apple x,y """
+    self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1)))
+    self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
+    while (self.x, self.y) in snake.pos:
+      self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1)))
+      self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
+
