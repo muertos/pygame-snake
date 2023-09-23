@@ -146,6 +146,9 @@ class Snake(Grid):
       self.length += 1
       pygame.mixer.Sound.play(self.eat_apple)
       apple.generate(self)
+      print(f"apple x: {apple.x}")
+      print(f"apple y: {apple.y}")
+      print(f"snake array: {self.pos}")
       self.update_score()
       apple.draw_cell(background, apple.x, apple.y, apple.color)
       # this seems wrong, but it works
@@ -164,15 +167,15 @@ class Snake(Grid):
 class Apple(Snake):
   def __init__(self, color) -> None:
     # don't spawn an x value within the snake's coords
-    self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1) + SNAKE_LENGTH))
-    self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
+    self.x = random.randrange(1, int(Game.screen_width / (Game.cell_width + 1) + SNAKE_LENGTH))
+    self.y = random.randrange(1, int(Game.screen_height / (Game.cell_width + 1)))
     self.color = color
 
   def generate(self, snake):
     """ generate new Apple x,y """
-    self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1)))
-    self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
+    self.x = random.randrange(1, int(Game.screen_width / (Game.cell_width + 1)))
+    self.y = random.randrange(1, int(Game.screen_height / (Game.cell_width + 1)))
     while (self.x, self.y) in snake.pos:
-      self.x = random.randrange(int(Game.screen_width / (Game.cell_width + 1)))
-      self.y = random.randrange(int(Game.screen_height / (Game.cell_width + 1)))
+      self.x = random.randrange(1, int(Game.screen_width / (Game.cell_width + 1)))
+      self.y = random.randrange(1, int(Game.screen_height / (Game.cell_width + 1)))
 
