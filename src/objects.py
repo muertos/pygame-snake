@@ -146,9 +146,6 @@ class Snake(Grid):
       self.length += 1
       pygame.mixer.Sound.play(self.eat_apple)
       apple.generate(self)
-      print(f"apple x: {apple.x}")
-      print(f"apple y: {apple.y}")
-      print(f"snake array: {self.pos}")
       self.update_score()
       apple.draw_cell(background, apple.x, apple.y, apple.color)
       # this seems wrong, but it works
